@@ -1,0 +1,50 @@
+
+  
+{% extends 'html/header.html' %}
+{% block title %}Cart{% endblock %}
+{% block content %}
+<div class="container-fluid" style="margin-top: 83px;">
+	{% if user.export.role == 1 %}
+		<div class="row">
+		{% for k in it %}
+		<tr>
+			<div class="col col-md-3">
+				<div class="card my-2">
+					<img class="card-img-top" src="{{k.impf.url}}" alt="Card image" style="height:150px;width:100%">
+					<div class="card-body">
+					<h3>{{k.item_name}}</h3>
+					<h6>Stock <span class="bg-success text-light border rounded border-danger p-1 mx-1">{{k.quantity}} Kgs</span><span>{% if k.is_stock == 0 %}<span class="bg-secondary text-light p-1 border rounded">Available</span>{% else %}<span class="bg-danger text-light border rounded p-1">Out of Stock</span>{% endif%}</span></h6>
+				</div>
+				</div>
+				</div>
+			</div>
+		</tr>
+		{% endfor %}
+		</div>
+		{% else %}
+		<div class="row">
+		{% for k in d %}
+		<tr>
+			<div class="col col-md-3">
+				<div class="card my-2">
+					<h3 class="bg-warning text-center border rounded p-1">{{k.0}}</h3>
+					<img class="card-img-top" src="{{k.4.url}}" alt="Card image" style="height:150px;width:100%">
+					<div class="card-body">
+					<h3>{{k.1}}</h3>
+					<h5>{{k.7}} <span>{{k.6}}</span></h5> 
+					<h6>Stock <span class="bg-success text-light border rounded border-danger p-1 mx-1">{{k.2}} Kgs</span><span>{% if k.5 == 0 %}<span class="bg-secondary text-light p-1 border rounded">Available</span>{% else %}<span class="bg-danger text-light border rounded p-1">Out of Stock</span>{% endif%}</span></h6>
+					<div class="col">
+						<a href="#" class="btn btn-success text-light col-sm">Rs.{{k.3}}</a>
+					</div>
+			
+					
+						</div>
+				</div>
+				</div>
+			</div>
+		</tr>
+		{% endfor %}
+		</div>
+	{% endif %}
+</div>
+{% endblock %}

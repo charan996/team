@@ -1,0 +1,20 @@
+
+{% extends 'html/header.html' %}
+{% block title %}Customisation{% endblock %}
+{% block content %}
+<div class="container mt-5">
+	<div class="card col-md-6 mx-auto">
+		<div class="card-body">
+		
+		<form method="POST">
+			{% csrf_token %}
+			{{prod.as_p}}
+			<textarea class="form-control my-2" cols="10" rows="5" placeholder="Leave us a message" name="msg"></textarea>
+				<input type="submit" value="submit" class="btn btn-success">
+			</form>
+			</div>
+	</div>
+	
+</div>
+
+{% endblock %}

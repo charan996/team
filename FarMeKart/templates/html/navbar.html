@@ -1,0 +1,103 @@
+{% load static %}
+
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <img src="{% static 'images/farmerlogo.png' %}" alt="Logo" class="rounded-circle mx-2" style="width:40px;">
+  <a class="navbar-brand" href="{% url 'hm' %}">FarMeKart </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      {% if not user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'hm' %}">Home</a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'au' %}">AboutUs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'ct' %}">ContactUs</a>
+      </li>
+      
+      {% else %}
+       {% if user.role == 2 %}
+    
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'items' %}">Items</a>
+      </li>
+      
+      
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'dsh' %}">Dashboard</a>
+      </li>
+      <ul class="navbar-nav ml-auto" style="margin-right:50px">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'cartdetails' %}">{{count}}<svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+</svg></a></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'myorders' %}">Myorders</a>
+      </li>
+      
+    </ul>
+      {% elif user.role == 1 %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'da' %}">Add Items</a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'items' %}">Dashboard</a>
+      </li>
+      
+      {% elif user.is_superuser %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'hm' %}">Home</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="{% url 'gperm' %}">Grant Permission</a>
+      
+    </li>
+      {% else %}
+      
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'hm' %}">Home</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="{% url 'pm' %}">Make Permission</a>
+    </li>
+
+      
+      {% endif %}
+
+      {% endif %}
+
+    </ul>
+
+      <ul class="navbar-nav ml-auto" style="margin-right:120px ">
+        {% if not user.is_authenticated %}
+        <li class="nav-item">  
+          <a class="nav-link" href="{% url 'lgo' %}">Login</a> 
+        </li>
+        {% else %}
+        <li class="dropdown">
+      <a type="button" class="nav-link dropdown-toggle" data-toggle="dropdown">
+        {% if user.role == 1 or  user.role == 2 or user.is_superuser %}
+      {{user.username}}
+       {% else %}
+       Guest
+       {% endif %}
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="{% url 'cg' %}">change password</a>
+        <a class="dropdown-item" href="{% url 'profile' %}">profile</a>
+        <a class="dropdown-item" href="{% url 'logo' %}">logout</a>
+      </div>
+    </li> 
+    {% endif %}
+      </ul>   
+    
+  </div>  
+</nav>

@@ -1,0 +1,42 @@
+
+
+
+{% extends 'html/header.html' %}
+{% block title %}User Credentials{% endblock %}
+{% block content %}
+ <div class="container">
+	<div class="card mx-auto col-md-4 mt-5">
+		<div class="card-body">
+			<form method="POST" enctype="multipart/form-data">
+				<h3>User Role Request Form</h3>
+				{% csrf_token %}
+				<input type="text" name="uname" placeholder="Enter Username" class="form-control my-2" value="{{request.user.username}}" readonly>
+				<input type="email" name="email" placeholder="Enter your Mail ID" class="form-control my-2" value="{{request.user.email}}" readonly>
+				<!-- <input type="text" name="utype" placeholder="Enter Your Role" class="form-control my-2"> -->
+				<select name="utype" class="form-control my-2">
+				<option value="Select Your Role">Select Your Role</option>
+  				<option value="Farmer">Farmer</option>
+  				<option value="Customer">Customer</option>
+  				</select>
+				<input type="text" name="uid" placeholder="Enter your ID" class="form-control my-2">
+				
+				<select name="utype1" class="form-control my-2">
+				<option value="Select Your Role">Select Your Requested File</option>
+  				<option value="Govt proof">Adhar</option>
+  				<option value="Pass Book">Pass Book</option>
+  				</select>
+				<input type="file" name="fe" multiple placeholder="select ur files" class="form-control-file my-2">
+				<textarea class="form-control my-2" cols="10" rows="5" placeholder="Leave us a message" name="msg"></textarea>
+				<div class="row">
+					<div class="col">
+					<input type="reset" name="Reset" class="btn btn-danger col-sm">
+					</div>
+					<div class="col">
+					<input type="submit" value="Approve my request" class="btn btn-success col-sm">
+					</div>
+                </div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
